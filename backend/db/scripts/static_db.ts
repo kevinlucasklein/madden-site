@@ -1234,6 +1234,210 @@ async function populateStaticData(): Promise<void> {
             );
         }
 
+        // Archetypes
+        const archetypes = [
+            { name: 'Receiving Back - HB', description: 'Running back who excels in the passing game' },
+            { name: 'Deep Threat - WR', description: 'Wide receiver specializing in long passing plays' },
+            { name: 'Improviser - QB', description: 'Quarterback who can create plays outside the pocket' },
+            { name: 'Vertical Threat - TE', description: 'Tight end who stretches the field vertically' },
+            { name: 'Power - OT', description: 'Offensive tackle who excels in power blocking' },
+            { name: 'Power Back - HB', description: 'Power-focused running back' },
+            { name: 'Field General - MLB', description: 'Middle linebacker who controls defensive assignments' },
+            { name: 'Possession - TE', description: 'Reliable catching tight end' },
+            { name: 'Speed Rusher - OLB', description: 'Outside linebacker focused on pass rushing with speed' },
+            { name: 'Power Rusher - DE', description: 'Defensive end who uses power moves' },
+            { name: 'Power Rusher - DT', description: 'Defensive tackle who uses power moves' },
+            { name: 'Zone - S', description: 'Safety who excels in zone coverage' },
+            { name: 'Manto Man - CB', description: 'Cornerback who specializes in man coverage' },
+            { name: 'Smaller Speed Rusher - DE', description: 'Undersized defensive end who relies on speed' },
+            { name: 'Physical - WR', description: 'Wide receiver who plays a physical style' },
+            { name: 'Slot - WR', description: 'Wide receiver who operates from the slot position' },
+            { name: 'Pass Protector - OT', description: 'Offensive tackle who excels in pass protection' },
+            { name: 'Elusive Back - HB', description: 'Running back who relies on elusiveness' },
+            { name: 'Run Support - S', description: 'Safety who excels in run defense' },
+            { name: 'Field General - QB', description: 'Quarterback who excels in pre-snap reads and adjustments' },
+            { name: 'Power - G', description: 'Guard who excels in power blocking' },
+            { name: 'Power - C', description: 'Center who excels in power blocking' },
+            { name: 'Pass Protector - G', description: 'Guard who excels in pass protection' },
+            { name: 'Run Stopper - DT', description: 'Defensive tackle who specializes in run defense' },
+            { name: 'Agile - C', description: 'Center who excels in mobility and agility' },
+            { name: 'Zone - CB', description: 'Cornerback who excels in zone coverage' },
+            { name: 'Run Stopper - DE', description: 'Defensive end who specializes in run defense' },
+            { name: 'Agile - G', description: 'Guard who excels in mobility and agility' },
+            { name: 'Power Rusher - OLB', description: 'Outside linebacker who uses power moves' },
+            { name: 'Agile - OT', description: 'Offensive tackle who excels in mobility' },
+            { name: 'Run Stopper - MLB', description: 'Middle linebacker who specializes in run defense' },
+            { name: 'Pass Coverage - OLB', description: 'Outside linebacker who excels in coverage' },
+            { name: 'Slot - CB', description: 'Cornerback who specializes in covering slot receivers' },
+            { name: 'Utility - FB', description: 'Fullback who contributes in multiple ways' },
+            { name: 'Hybrid - S', description: 'Safety who can play multiple defensive back positions' },
+            { name: 'Accurate - KP', description: 'Accurate kicker' },
+            { name: 'Power - KP', description: 'Power-focused kicker' },
+            { name: 'Speed Rusher - DT', description: 'Defensive tackle who relies on speed' },
+            { name: 'Run Stopper - OLB', description: 'Outside linebacker who specializes in run defense' },
+            { name: 'Pass Protector - C', description: 'Center who excels in pass protection' },
+            { name: 'Scrambler - QB', description: 'Mobile quarterback who can extend plays' },
+            { name: 'Blocking - FB', description: 'Fullback who specializes in blocking' },
+            { name: 'Pass Coverage - MLB', description: 'Middle linebacker who excels in coverage' },
+            { name: 'Blocking - TE', description: 'Tight end who specializes in blocking' }
+        ];
+
+        const archetypeResult = await client.query(`
+            INSERT INTO archetype (archetype, description)
+            VALUES ${archetypes.map((_, i) => `($${i * 2 + 1}, $${i * 2 + 2})`).join(', ')}
+            ON CONFLICT (archetype) DO NOTHING
+        `, archetypes.flatMap(a => [a.name, a.description]));
+
+        results.push({
+            table: 'archetype',
+            rowCount: archetypeResult.rowCount
+        });
+
+        const heights = [
+            // 5'4" - 5'8"
+            {height_inches: 64, display_height: "5'4\""},
+            {height_inches: 65, display_height: "5'5\""},
+            {height_inches: 66, display_height: "5'6\""},
+            {height_inches: 67, display_height: "5'7\""},
+            {height_inches: 68, display_height: "5'8\""},
+            // 5'9" - 5'11"
+            {height_inches: 69, display_height: "5'9\""},
+            {height_inches: 70, display_height: "5'10\""},
+            {height_inches: 71, display_height: "5'11\""},
+            // 6'0" - 6'8"
+            {height_inches: 72, display_height: "6'0\""},
+            {height_inches: 73, display_height: "6'1\""},
+            {height_inches: 74, display_height: "6'2\""},
+            {height_inches: 75, display_height: "6'3\""},
+            {height_inches: 76, display_height: "6'4\""},
+            {height_inches: 77, display_height: "6'5\""},
+            {height_inches: 78, display_height: "6'6\""},
+            {height_inches: 79, display_height: "6'7\""},
+            {height_inches: 80, display_height: "6'8\""},
+            // 6'9" - 7'0"
+            {height_inches: 81, display_height: "6'9\""},
+            {height_inches: 82, display_height: "6'10\""},
+            {height_inches: 83, display_height: "6'11\""},
+            {height_inches: 84, display_height: "7'0\""}
+        ];
+
+        const heightResult = await client.query(`
+            INSERT INTO player_height (height_inches, display_height)
+            VALUES ${heights.map((_, i) => `($${i * 2 + 1}, $${i * 2 + 2})`).join(', ')}
+            ON CONFLICT (height_inches) DO NOTHING
+        `, heights.flatMap(h => [h.height_inches, h.display_height]));
+
+        results.push({
+            table: 'player_height',
+            rowCount: heightResult.rowCount
+        });
+
+        // Player Weights (150-400 lbs, incrementing by 1)
+        const weights = Array.from({length: 251}, (_, i) => {
+            const weightLbs = 150 + i;
+            return {
+                weight_lbs: weightLbs,
+                display_weight: `${weightLbs} lbs`
+            };
+        });
+
+        const weightResult = await client.query(`
+            INSERT INTO player_weight (weight_lbs, display_weight)
+            VALUES ${weights.map((_, i) => `($${i * 2 + 1}, $${i * 2 + 2})`).join(', ')}
+            ON CONFLICT (weight_lbs) DO NOTHING
+        `, weights.flatMap(w => [w.weight_lbs, w.display_weight]));
+
+        results.push({
+            table: 'player_weight',
+            rowCount: weightResult.rowCount
+        });
+
+        // Player Ages (20-45 years)
+        const ages = Array.from({length: 32}, (_, i) => {
+            const ageYears = 18 + i;
+            return {
+                age_years: ageYears,
+                display_age: `${ageYears} years`
+            };
+        });
+
+        const ageResult = await client.query(`
+            INSERT INTO player_age (age_years, display_age)
+            VALUES ${ages.map((_, i) => `($${i * 2 + 1}, $${i * 2 + 2})`).join(', ')}
+            ON CONFLICT (age_years) DO NOTHING
+        `, ages.flatMap(a => [a.age_years, a.display_age]));
+
+        results.push({
+            table: 'player_age',
+            rowCount: ageResult.rowCount
+        });
+
+        // Jersey Numbers (0-99)
+        const jerseyNumbers = Array.from({length: 100}, (_, i) => ({
+            number: i,
+            display_number: i.toString()
+        }));
+
+        const jerseyNumberResult = await client.query(`
+            INSERT INTO jersey_number (number, display_number)
+            VALUES ${jerseyNumbers.map((_, i) => `($${i * 2 + 1}, $${i * 2 + 2})`).join(', ')}
+            ON CONFLICT (number) DO NOTHING
+        `, jerseyNumbers.flatMap(j => [j.number, j.display_number]));
+
+        results.push({
+            table: 'jersey_number',
+            rowCount: jerseyNumberResult.rowCount
+        });
+
+        // Years Pro (0-25 years)
+        const yearsPro = Array.from({length: 26}, (_, i) => ({
+            years: i,
+            display_years: i === 0 ? 'Rookie' : `${i} ${i === 1 ? 'year' : 'years'}`
+        }));
+
+        const yearsProResult = await client.query(`
+            INSERT INTO years_pro (years, display_years)
+            VALUES ${yearsPro.map((_, i) => `($${i * 2 + 1}, $${i * 2 + 2})`).join(', ')}
+            ON CONFLICT (years) DO NOTHING
+        `, yearsPro.flatMap(y => [y.years, y.display_years]));
+
+        results.push({
+            table: 'years_pro',
+            rowCount: yearsProResult.rowCount
+        });
+
+        // Draft Types
+        const draftTypes = [
+            { name: 'Linear', description: 'Draft order is based on the team\'s overall pick order' },
+            { name: 'Snake', description: 'Draft order is based on the team\'s overall pick order, but in a snake-like pattern' },
+        ]
+
+        for (const draftType of draftTypes) {
+            await client.query(
+                'INSERT INTO draft_type (type_name, description) VALUES ($1, $2) ON CONFLICT (type_name) DO NOTHING',
+                [draftType.name, draftType.description]
+            );
+        }
+
+        // Populate draft picks (54 rounds × 32 picks = 1,728 total picks)
+        const draftPickResult = await client.query(`
+            INSERT INTO draft_pick (round_number, pick_in_round, overall_pick, display_pick)
+            VALUES ${Array.from({ length: 54 }, (_, round) => 
+                Array.from({ length: 32 }, (_, pick) => {
+                    const r = round + 1;
+                    const p = pick + 1;
+                    const overall = ((r - 1) * 32) + p;
+                    return `(${r}, ${p}, ${overall}, 'Round ${r}, Pick ${p} (${overall} overall)')`;
+                }).join(',\n')
+            ).join(',\n')}
+            ON CONFLICT (overall_pick) DO NOTHING
+        `);
+
+        results.push({
+            table: 'draft_pick',
+            rowCount: draftPickResult.rowCount
+        });
+
         // Image Types
         const imageTypes = [
             { name: 'Portrait', description: 'Player headshot image' },
