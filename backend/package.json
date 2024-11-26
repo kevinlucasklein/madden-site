@@ -6,8 +6,8 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "setup:db": "tsx db/create_db_if_not_exist.ts && tsx db/setup_db.ts",
-    "delete:db": "tsx db/delete_db.ts"
+    "setup:db": "tsx db/scripts/create_db_if_not_exist.ts && tsx db/scripts/setup_db.ts",
+    "delete:db": "tsx db/scripts/delete_db.ts"
   },
   "keywords": [],
   "author": "",
