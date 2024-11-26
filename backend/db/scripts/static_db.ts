@@ -245,7 +245,11 @@ async function populateStaticData(): Promise<void> {
             { name: 'FBS', level: 1 },
             { name: 'FCS', level: 2 },
             { name: 'Division II', level: 3 },
-            { name: 'Division III', level: 4 }
+            { name: 'Division III', level: 4 },
+            { name: 'No Division', level: 5 },
+            { name: 'International', level: 6 },
+            { name: 'Division I', level: 7 },
+            { name: 'NAIA', level: 8 }
         ];
 
         for (const div of collegeDivisions) {
@@ -286,6 +290,10 @@ async function populateStaticData(): Promise<void> {
             { name: 'Southwestern Athletic Conference', abbrev: 'SWAC', division: 'FCS' },
             { name: 'United Athletic Conference', abbrev: 'UAC', division: 'FCS' },
             { name: 'FCS Independent', abbrev: 'FCS-Ind', division: 'FCS' },
+
+            // Division I Conferences
+            { name: 'Atlantic 10 Conference', abbrev: 'A10', division: 'Division I' },
+            { name: 'Metro Atlantic Athletic Conference', abbrev: 'MAAC', division: 'Division I' },
 
             // Division II Conferences
             { name: 'California Collegiate Athletic Association', abbrev: 'CCAA', division: 'Division II' },
@@ -359,6 +367,16 @@ async function populateStaticData(): Promise<void> {
             { name: 'Eastern Collegiate Football Conference', abbrev: 'ECFC', division: 'Division III' },
             { name: 'Allegheny Mountain Collegiate Conference', abbrev: 'AMCC', division: 'Division III' },
             { name: 'Division III Independent', abbrev: 'D3-Ind', division: 'Division III' }, 
+
+            // NAIA Conferences
+            { name: 'Heart of America Athletic Conference', abbrev: 'HAAC', division: 'NAIA' },
+            { name: 'Kansas Collegiate Athletic Conference', abbrev: 'KCAC', division: 'NAIA' },
+
+            // International
+            { name: 'U Sports', abbrev: 'USPORTS', division: 'International' },
+
+            // No Conference
+            { name: 'No Conference', abbrev: 'NONE', division: 'No Division' }
         ];
 
         for (const conf of collegeConferences) {
@@ -470,7 +488,7 @@ async function populateStaticData(): Promise<void> {
             { name: 'Toledo', conference: 'Mid-American Conference', mascot: 'Rockets', primaryColor: '#003E7E', secondaryColor: '#FFB20F' },
             { name: 'Western Michigan', conference: 'Mid-American Conference', mascot: 'Broncos', primaryColor: '#6C4023', secondaryColor: '#B5A167' },
 
-                        // Mountain West Conference
+            // Mountain West Conference
             { name: 'Air Force', conference: 'Mountain West Conference', mascot: 'Falcons', primaryColor: '#003087', secondaryColor: '#8A8D8F' },
             { name: 'Boise State', conference: 'Mountain West Conference', mascot: 'Broncos', primaryColor: '#0033A0', secondaryColor: '#D64309' },
             { name: 'Colorado State', conference: 'Mountain West Conference', mascot: 'Rams', primaryColor: '#1E4D2B', secondaryColor: '#C8C372' },
@@ -527,6 +545,12 @@ async function populateStaticData(): Promise<void> {
             { name: 'UConn', conference: 'FBS Independent', mascot: 'Huskies', primaryColor: '#000E2F', secondaryColor: '#E4002B' },
             { name: 'UMass', conference: 'FBS Independent', mascot: 'Minutemen', primaryColor: '#881C1C', secondaryColor: '#000000' },
 
+            // Atlantic 10 Conference
+            { name: 'Virginia Commonwealth', conference: 'Atlantic 10 Conference', mascot: 'Rams', primaryColor: '#000000', secondaryColor: '#FFB300' },
+
+            // Metro Atlantic Athletic Conference
+            { name: 'Canisius', conference: 'Metro Atlantic Athletic Conference', mascot: 'Golden Griffins', primaryColor: '#002664', secondaryColor: '#CEB888' },
+
             // Big Sky Conference
             { name: 'Cal Poly', conference: 'Big Sky Conference', mascot: 'Mustangs', primaryColor: '#154734', secondaryColor: '#C69214' },
             { name: 'Eastern Washington', conference: 'Big Sky Conference', mascot: 'Eagles', primaryColor: '#A10022', secondaryColor: '#000000' },
@@ -556,12 +580,14 @@ async function populateStaticData(): Promise<void> {
 
             // CAA Football
             { name: 'Albany', conference: 'CAA Football', mascot: 'Great Danes', primaryColor: '#461660', secondaryColor: '#EEB211' },
+            { name: 'Campbell', conference: 'CAA Football', mascot: 'Fighting Camels', primaryColor: '#F58025', secondaryColor: '#231F20' },
             { name: 'Delaware', conference: 'CAA Football', mascot: 'Blue Hens', primaryColor: '#00539F', secondaryColor: '#FFD200' },
             { name: 'Elon', conference: 'CAA Football', mascot: 'Phoenix', primaryColor: '#800000', secondaryColor: '#B3A369' },
             { name: 'Hampton', conference: 'CAA Football', mascot: 'Pirates', primaryColor: '#0067B1', secondaryColor: '#FFFFFF' },
             { name: 'Maine', conference: 'CAA Football', mascot: 'Black Bears', primaryColor: '#003263', secondaryColor: '#B0B7BC' },
             { name: 'Monmouth', conference: 'CAA Football', mascot: 'Hawks', primaryColor: '#041E42', secondaryColor: '#8B8B8B' },
             { name: 'New Hampshire', conference: 'CAA Football', mascot: 'Wildcats', primaryColor: '#003DA5', secondaryColor: '#FFFFFF' },
+            { name: 'North Carolina A&T', conference: 'CAA Football', mascot: 'Aggies', primaryColor: '#004684', secondaryColor: '#F7B722' },
             { name: 'Rhode Island', conference: 'CAA Football', mascot: 'Rams', primaryColor: '#002147', secondaryColor: '#75B2DD' },
             { name: 'Richmond', conference: 'CAA Football', mascot: 'Spiders', primaryColor: '#990000', secondaryColor: '#000066' },
             { name: 'Stony Brook', conference: 'CAA Football', mascot: 'Seawolves', primaryColor: '#990000', secondaryColor: '#16243E' },
@@ -590,6 +616,7 @@ async function populateStaticData(): Promise<void> {
             // Missouri Valley Football Conference
             { name: 'Illinois State', conference: 'Missouri Valley Football Conference', mascot: 'Redbirds', primaryColor: '#CE1126', secondaryColor: '#000000' },
             { name: 'Indiana State', conference: 'Missouri Valley Football Conference', mascot: 'Sycamores', primaryColor: '#00669A', secondaryColor: '#FFFFFF' },
+            { name: 'Murray State', conference: 'Missouri Valley Football Conference', mascot: 'Racers', primaryColor: '#002144', secondaryColor: '#FDB826' },
             { name: 'Missouri State', conference: 'Missouri Valley Football Conference', mascot: 'Bears', primaryColor: '#5F0000', secondaryColor: '#000000' },
             { name: 'North Dakota', conference: 'Missouri Valley Football Conference', mascot: 'Fighting Hawks', primaryColor: '#009A44', secondaryColor: '#000000' },
             { name: 'North Dakota State', conference: 'Missouri Valley Football Conference', mascot: 'Bison', primaryColor: '#0A5640', secondaryColor: '#FFC72C' },
@@ -598,7 +625,7 @@ async function populateStaticData(): Promise<void> {
             { name: 'South Dakota State', conference: 'Missouri Valley Football Conference', mascot: 'Jackrabbits', primaryColor: '#0033A0', secondaryColor: '#FFB81C' },
             { name: 'Southern Illinois', conference: 'Missouri Valley Football Conference', mascot: 'Salukis', primaryColor: '#720000', secondaryColor: '#000000' },
             { name: 'Western Illinois', conference: 'Missouri Valley Football Conference', mascot: 'Leathernecks', primaryColor: '#663399', secondaryColor: '#FFC72C' },
-
+            { name: 'Youngstown State', conference: 'Missouri Valley Football Conference', mascot: 'Penguins', primaryColor: '#C41230', secondaryColor: '#000000' },
             // Northeast Conference (NEC)
             { name: 'Central Connecticut', conference: 'Northeast Conference', mascot: 'Blue Devils', primaryColor: '#003087', secondaryColor: '#FFFFFF' },
             { name: 'Duquesne', conference: 'Northeast Conference', mascot: 'Dukes', primaryColor: '#041E42', secondaryColor: '#BA0C2F' },
@@ -723,12 +750,16 @@ async function populateStaticData(): Promise<void> {
             { name: 'Missouri S&T', conference: 'Great Lakes Valley Conference', mascot: 'Miners', primaryColor: '#003B49', secondaryColor: '#8A8D8F' },
             { name: 'William Jewell', conference: 'Great Lakes Valley Conference', mascot: 'Cardinals', primaryColor: '#C8102E', secondaryColor: '#000000' },
 
+            // Great Northwest Athletic Conference (GNAC)
+            { name: 'Cal Poly Humboldt', conference: 'Great Northwest Athletic Conference', mascot: 'Lumberjacks', primaryColor: '#046A38', secondaryColor: '#FFB81C' },
+
             // Great Midwest Athletic Conference (GMAC)
             { name: 'Ashland', conference: 'Great Midwest Athletic Conference', mascot: 'Eagles', primaryColor: '#582C83', secondaryColor: '#FFB81C' },
             { name: 'Findlay', conference: 'Great Midwest Athletic Conference', mascot: 'Oilers', primaryColor: '#FF7900', secondaryColor: '#000000' },
             { name: 'Hillsdale', conference: 'Great Midwest Athletic Conference', mascot: 'Chargers', primaryColor: '#0033A0', secondaryColor: '#FFFFFF' },
             { name: 'Kentucky Wesleyan', conference: 'Great Midwest Athletic Conference', mascot: 'Panthers', primaryColor: '#4B2682', secondaryColor: '#000000' },
             { name: 'Lake Erie', conference: 'Great Midwest Athletic Conference', mascot: 'Storm', primaryColor: '#00594C', secondaryColor: '#7C878E' },
+            { name: 'Malone', conference: 'Great Midwest Athletic Conference', mascot: 'Pioneers', primaryColor: '#231F20', secondaryColor: '#BE1E2D' },
             { name: 'Ohio Dominican', conference: 'Great Midwest Athletic Conference', mascot: 'Panthers', primaryColor: '#000000', secondaryColor: '#FFB81C' },
             { name: 'Tiffin', conference: 'Great Midwest Athletic Conference', mascot: 'Dragons', primaryColor: '#2D6444', secondaryColor: '#FFB81C' },
             { name: 'Walsh', conference: 'Great Midwest Athletic Conference', mascot: 'Cavaliers', primaryColor: '#8C2131', secondaryColor: '#FFB81C' },
@@ -739,9 +770,11 @@ async function populateStaticData(): Promise<void> {
             { name: 'Shorter', conference: 'Gulf South Conference', mascot: 'Hawks', primaryColor: '#0033A0', secondaryColor: '#FFFFFF' },
             { name: 'West Alabama', conference: 'Gulf South Conference', mascot: 'Tigers', primaryColor: '#CC0000', secondaryColor: '#808080' },
             { name: 'West Florida', conference: 'Gulf South Conference', mascot: 'Argonauts', primaryColor: '#0055A2', secondaryColor: '#7EA9C8' },
+            { name: 'Valdosta State', conference: 'Gulf South Conference', mascot: 'Blazers', primaryColor: '#CC0000', secondaryColor: '#000000' },
 
             // Lone Star Conference (LSC)
             { name: 'Angelo State', conference: 'Lone Star Conference', mascot: 'Rams', primaryColor: '#005DAA', secondaryColor: '#FFB81C' },
+            { name: 'Azusa Pacific', conference: 'Lone Star Conference', mascot: 'Cougars', primaryColor: '#000000', secondaryColor: '#C69214' },
             { name: 'Eastern New Mexico', conference: 'Lone Star Conference', mascot: 'Greyhounds', primaryColor: '#006747', secondaryColor: '#A8996E' },
             { name: 'Midwestern State', conference: 'Lone Star Conference', mascot: 'Mustangs', primaryColor: '#8B2346', secondaryColor: '#FFB81C' },
             { name: 'Sul Ross State', conference: 'Lone Star Conference', mascot: 'Lobos', primaryColor: '#862633', secondaryColor: '#000000' },
@@ -789,6 +822,7 @@ async function populateStaticData(): Promise<void> {
             { name: 'Bemidji State', conference: 'Northern Sun Intercollegiate Conference', mascot: 'Beavers', primaryColor: '#004236', secondaryColor: '#000000' },
             { name: 'Concordia-St. Paul', conference: 'Northern Sun Intercollegiate Conference', mascot: 'Golden Bears', primaryColor: '#002D72', secondaryColor: '#FFB81C' },
             { name: 'Minnesota State Moorhead', conference: 'Northern Sun Intercollegiate Conference', mascot: 'Dragons', primaryColor: '#C8102E', secondaryColor: '#000000' },
+            { name: 'Minnesota State-Mankato', conference: 'Northern Sun Intercollegiate Conference', mascot: 'Mavericks', primaryColor: '#4C0076', secondaryColor: '#FDB913' },
             { name: 'Northern State', conference: 'Northern Sun Intercollegiate Conference', mascot: 'Wolves', primaryColor: '#862633', secondaryColor: '#FFB81C' },
             { name: 'Southwest Minnesota State', conference: 'Northern Sun Intercollegiate Conference', mascot: 'Mustangs', primaryColor: '#582C83', secondaryColor: '#8A8D8F' },
             { name: 'Mary', conference: 'Northern Sun Intercollegiate Conference', mascot: 'Marauders', primaryColor: '#003087', secondaryColor: '#FFB81C' },
@@ -812,6 +846,7 @@ async function populateStaticData(): Promise<void> {
             { name: 'Mercyhurst', conference: 'Pennsylvania State Athletic Conference', mascot: 'Lakers', primaryColor: '#00387B', secondaryColor: '#6CC24A' },
             { name: 'Millersville', conference: 'Pennsylvania State Athletic Conference', mascot: 'Marauders', primaryColor: '#000000', secondaryColor: '#FFB81C' },
             { name: 'Seton Hill', conference: 'Pennsylvania State Athletic Conference', mascot: 'Griffins', primaryColor: '#8B0000', secondaryColor: '#FFB81C' },
+            { name: 'Shepherd', conference: 'Pennsylvania State Athletic Conference', mascot: 'Rams', primaryColor: '#005EB8', secondaryColor: '#FFB81C' },
             { name: 'Shippensburg', conference: 'Pennsylvania State Athletic Conference', mascot: 'Raiders', primaryColor: '#004990', secondaryColor: '#CC0000' },
             { name: 'Slippery Rock', conference: 'Pennsylvania State Athletic Conference', mascot: 'The Rock', primaryColor: '#004990', secondaryColor: '#FFB81C' },
             { name: 'West Chester', conference: 'Pennsylvania State Athletic Conference', mascot: 'Golden Rams', primaryColor: '#461B7E', secondaryColor: '#FFB81C' },
@@ -830,6 +865,7 @@ async function populateStaticData(): Promise<void> {
 
             // South Atlantic Conference (SAC)
             { name: 'Anderson', conference: 'South Atlantic Conference', mascot: 'Trojans', primaryColor: '#000000', secondaryColor: '#FFB81C' },
+            { name: 'Barton', conference: 'South Atlantic Conference', mascot: 'Bulldogs', primaryColor: '#0066CC', secondaryColor: '#FFFFFF' },
             { name: 'Carson-Newman', conference: 'South Atlantic Conference', mascot: 'Eagles', primaryColor: '#FF7F00', secondaryColor: '#0033A0' },
             { name: 'Catawba', conference: 'South Atlantic Conference', mascot: 'Indians', primaryColor: '#00249C', secondaryColor: '#FFFFFF' },
             { name: 'Emory & Henry', conference: 'South Atlantic Conference', mascot: 'Wasps', primaryColor: '#003087', secondaryColor: '#FFB81C' },
@@ -1101,7 +1137,24 @@ async function populateStaticData(): Promise<void> {
             { name: 'Claremont-Mudd-Scripps', conference: 'Southern California Intercollegiate Athletic Conference', mascot: 'Stags', primaryColor: '#8B0000', secondaryColor: '#FFB81C' },
             { name: 'La Verne', conference: 'Southern California Intercollegiate Athletic Conference', mascot: 'Leopards', primaryColor: '#006747', secondaryColor: '#FFB81C' },
             { name: 'Occidental', conference: 'Southern California Intercollegiate Athletic Conference', mascot: 'Tigers', primaryColor: '#F47920', secondaryColor: '#000000' },
-            { name: 'Pomona-Pitzer', conference: 'Southern California Intercollegiate Athletic Conference', mascot: 'Sagehens', primaryColor: '#003087', secondaryColor: '#FFB81C' }
+            { name: 'Pomona-Pitzer', conference: 'Southern California Intercollegiate Athletic Conference', mascot: 'Sagehens', primaryColor: '#003087', secondaryColor: '#FFB81C' },
+
+            // St. Louis Intercollegiate Athletic Conference (SLIAC)
+            { name: 'Greenville', conference: 'St. Louis Intercollegiate Athletic Conference', mascot: 'Panthers', primaryColor: '#F7941E', secondaryColor: '#000000' },
+
+            // Wisconsin Intercollegiate Athletic Conference (WIAC)
+            { name: 'Wisconsin-Whitewater', conference: 'Wisconsin Intercollegiate Athletic Conference', mascot: 'Warhawks', primaryColor: '#4F2683', secondaryColor: '#FFC82E' },
+
+            // NAIA Conferences
+            { name: 'Friends University', conference: 'Kansas Collegiate Athletic Conference', mascot: 'Falcons', primaryColor: '#98012E', secondaryColor: '#888B8D' },
+            { name: 'Culver-Stockton', conference: 'Heart of America Athletic Conference', mascot: 'Wildcats', primaryColor: '#00205B', secondaryColor: '#FFFFFF' },
+            // International
+            { name: 'Manitoba', conference: 'U Sports', mascot: 'Bisons', primaryColor: '#783141', secondaryColor: '#FFB81C' },
+            { name: 'British Columbia', conference: 'U Sports', mascot: 'Thunderbirds', primaryColor: '#002145', secondaryColor: '#97D4E9' },
+            { name: 'Alberta', conference: 'U Sports', mascot: 'Golden Bears', primaryColor: '#007C41', secondaryColor: '#FFDB05' },
+
+            // No College
+            { name: 'No College', conference: 'No Conference', mascot: 'None', primaryColor: '#000000', secondaryColor: '#FFFFFF' }
         ];
 
         for (const college of fbsColleges) {

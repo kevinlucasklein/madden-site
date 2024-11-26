@@ -176,9 +176,22 @@ CREATE TABLE player_ability (
     player_ability_id SERIAL PRIMARY KEY,
     player_id INTEGER NOT NULL,
     ability_id INTEGER NOT NULL,
+    iteration_id INTEGER NOT NULL,
     FOREIGN KEY (player_id) REFERENCES player(player_id),
     FOREIGN KEY (ability_id) REFERENCES ability(ability_id),
-    UNIQUE(player_id, ability_id)
+    FOREIGN KEY (iteration_id) REFERENCES rating_iteration(iteration_id),
+    UNIQUE(player_id, ability_id, iteration_id)
+);
+
+CREATE TABLE player_archetype (
+    player_archetype_id SERIAL PRIMARY KEY,
+    player_id INTEGER NOT NULL,
+    archetype_id INTEGER NOT NULL,
+    iteration_id INTEGER NOT NULL,
+    FOREIGN KEY (player_id) REFERENCES player(player_id),
+    FOREIGN KEY (archetype_id) REFERENCES archetype(archetype_id),
+    FOREIGN KEY (iteration_id) REFERENCES rating_iteration(iteration_id),
+    UNIQUE(player_id, archetype_id, iteration_id)
 );
 
 CREATE TABLE player_rating (

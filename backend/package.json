@@ -7,7 +7,10 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "setup:db": "tsx db/scripts/create_db_if_not_exist.ts && tsx db/scripts/setup_db.ts && tsx db/scripts/static_db.ts",
-    "delete:db": "tsx db/scripts/delete_db.ts"
+    "delete:db": "tsx db/scripts/delete_db.ts",
+    "update:ratings": "tsx db/scripts/updateRatings.ts",
+    "reset:db": "npm run delete:db && npm run setup:db && npm run update:ratings"
+    
   },
   "keywords": [],
   "author": "",
@@ -15,6 +18,7 @@
   "description": "",
   "dependencies": {
     "@apollo/server": "^4.11.2",
+    "axios": "^1.7.5",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
