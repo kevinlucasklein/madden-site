@@ -6,7 +6,7 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "setup:db": "tsx db/scripts/create_db_if_not_exist.ts && tsx db/scripts/setup_db.ts",
+    "setup:db": "tsx db/scripts/create_db_if_not_exist.ts && tsx db/scripts/setup_db.ts && tsx db/scripts/static_db.ts",
     "delete:db": "tsx db/scripts/delete_db.ts"
   },
   "keywords": [],
@@ -20,12 +20,14 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "graphql": "^16.9.0",
+    "pg": "^8.13.1",
     "typescript": "^5.7.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^22.9.4",
+    "@types/pg": "^8.11.10",
     "tsx": "^4.19.2"
   }
 }

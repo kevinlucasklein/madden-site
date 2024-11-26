@@ -9,7 +9,7 @@ CREATE TABLE position_type (
 
 CREATE TABLE position (
     position_id SERIAL PRIMARY KEY,
-    position VARCHAR(50) NOT NULL,
+    position VARCHAR(50) NOT NULL UNIQUE,  -- Add UNIQUE here
     type_id INTEGER NOT NULL,
     FOREIGN KEY (type_id) REFERENCES position_type(type_id)
 );
@@ -28,9 +28,10 @@ CREATE TABLE league_division (
     FOREIGN KEY (conference_id) REFERENCES league_conference(conference_id)
 );
 
+
 CREATE TABLE team (
     team_id SERIAL PRIMARY KEY,
-    team_label VARCHAR(100) NOT NULL,
+    team_label VARCHAR(100) NOT NULL UNIQUE,  -- Add UNIQUE here
     division_id INTEGER NOT NULL,
     FOREIGN KEY (division_id) REFERENCES league_division(division_id)
 );
@@ -81,7 +82,7 @@ CREATE TABLE ability (
 
 CREATE TABLE image_type (
     type_id SERIAL PRIMARY KEY,
-    type_name VARCHAR(50) NOT NULL UNIQUE,
+    type_name VARCHAR(50) NOT NULL UNIQUE,  -- Add UNIQUE constraint here
     description TEXT
 );
 
