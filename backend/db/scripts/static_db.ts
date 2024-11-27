@@ -1332,7 +1332,9 @@ async function populateStaticData(): Promise<void> {
             { name: 'Scrambler - QB', description: 'Mobile quarterback who can extend plays' },
             { name: 'Blocking - FB', description: 'Fullback who specializes in blocking' },
             { name: 'Pass Coverage - MLB', description: 'Middle linebacker who excels in coverage' },
-            { name: 'Blocking - TE', description: 'Tight end who specializes in blocking' }
+            { name: 'Blocking - TE', description: 'Tight end who specializes in blocking' },
+            { name: 'Strong Arm - QB', description: 'Quarterback who excels in throwing the deep ball' },
+            { name: 'None', description: 'No archetype assigned' },
         ];
 
         const archetypeResult = await client.query(`

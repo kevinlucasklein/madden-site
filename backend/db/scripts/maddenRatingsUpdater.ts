@@ -29,6 +29,11 @@ interface PlayerPosition {
     };
   }
 
+  interface PlayerArchetype {
+    id: string;    // e.g., "HB_ReceivingBack"
+    label: string; // e.g., "Receiving Back - HB"
+  }
+
 interface PlayerStats {
   [key: string]: {
     value: number | string;
@@ -49,6 +54,7 @@ interface PlayerData {
   jerseyNum: number;
   yearsPro: number;
   playerAbilities: PlayerAbility[];
+  archetype: PlayerArchetype;
   team: {
     id: number;
     label: string;
@@ -75,6 +81,7 @@ interface ProcessedPlayer {
   positionId: number;
   teamId: number;
   abilities: string[];
+  archetype: PlayerArchetype | null;
   stats: PlayerStats;
   iterationId: string;
 }
@@ -264,7 +271,7 @@ class MaddenRatingsUpdater {
     const playerName = `${player.firstName} ${player.lastName}`;
   
     try {
-      const [heightId, weightId, ageId, handednessId, jerseyNumberId, yearsProId, positionId, teamId, collegeId] = 
+      const [heightId, weightId, ageId, handednessId, jerseyNumberId, yearsProId, positionId, teamId, collegeId, archetypeId] = 
         await Promise.all([
             this.getHeightId(player.height),
             this.getWeightId(player.weight),
@@ -274,7 +281,8 @@ class MaddenRatingsUpdater {
             this.getYearsProId(Number(player.yearsPro)), 
             this.getPositionId(player.position),
             this.getTeamId(player.team.label),
-            this.getCollegeId(player.college, playerName)  // Pass player name here
+            this.getCollegeId(player.college, playerName),  // Pass player name here
+            this.getArchetypeId(player.archetype)
         ]);
   
       return {
@@ -291,6 +299,7 @@ class MaddenRatingsUpdater {
         positionId,
         teamId,
         abilities: player.playerAbilities.map(ability => ability.label),
+        archetype: player.archetype || null,
         stats: player.stats,
         iterationId: player.iteration.id
       };
@@ -471,6 +480,31 @@ class MaddenRatingsUpdater {
             });
             }
         }
+
+        // Handle player archetype
+        console.log('Processing archetype:', {
+            playerId: player.playerId,
+            archetype: player.archetype
+        });
+    
+        const archetypeId = await this.getArchetypeId(player.archetype);
+    
+        const archetypeQuery = `
+            INSERT INTO player_archetype (player_id, archetype_id, iteration_id)
+            VALUES ($1, $2, $3)
+            RETURNING *
+        `;
+    
+        const archetypeResult = await client.query(archetypeQuery, [
+            player.playerId,
+            archetypeId,
+            iterationId
+        ]);
+    
+        console.log('Archetype insert result:', {
+            rowCount: archetypeResult.rowCount,
+            rows: archetypeResult.rows
+        });
 
 
         await client.query(ratingQuery, ratingValues);
@@ -850,6 +884,25 @@ class MaddenRatingsUpdater {
     }
   
     return result.rows[0].college_id;
+  }
+
+  private async getArchetypeId(archetype: PlayerArchetype | null): Promise<number> {
+    const archetypeLabel = archetype?.label || 'None';
+  
+    const result = await this.pool.query(
+      'SELECT archetype_id FROM archetype WHERE archetype = $1',
+      [archetypeLabel]
+    );
+  
+    if (!result.rows[0]) {
+      console.error(`Archetype not found in database:`, {
+        label: archetypeLabel,
+        originalArchetype: archetype
+      });
+      throw new Error(`Archetype not found: ${archetypeLabel}`);
+    }
+  
+    return result.rows[0].archetype_id;
   }
 
 
