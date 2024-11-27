@@ -41,7 +41,7 @@ interface PlayerStats {
   };
 }
 
-interface PlayerData {
+export interface PlayerData {
   id: number;
   overallRating: number;
   firstName: string;
@@ -444,22 +444,10 @@ class MaddenRatingsUpdater {
         )
         VALUES (${ratingValues.map((_, i) => `$${i + 1}`).join(', ')})
         `;
-
-                // Handle player abilities
-        console.log('Player abilities check:', {
-            hasAbilities: !!player.abilities,
-            isArray: Array.isArray(player.abilities),
-            abilities: player.abilities
-        });
     
         if (Array.isArray(player.abilities)) {
             // Insert new abilities for this iteration
-            for (const ability of player.abilities) {
-            console.log('Processing ability:', {
-                playerId: player.playerId,
-                abilityLabel: ability
-            });
-    
+            for (const ability of player.abilities) {    
             const abilityQuery = `
                 INSERT INTO player_ability (player_id, ability_id, iteration_id)
                 SELECT $1, ability_id, $3
@@ -473,19 +461,8 @@ class MaddenRatingsUpdater {
                 ability,
                 iterationId
             ]);
-    
-            console.log('Ability insert result:', {
-                rowCount: result.rowCount,
-                rows: result.rows
-            });
             }
         }
-
-        // Handle player archetype
-        console.log('Processing archetype:', {
-            playerId: player.playerId,
-            archetype: player.archetype
-        });
     
         const archetypeId = await this.getArchetypeId(player.archetype);
     
@@ -500,11 +477,6 @@ class MaddenRatingsUpdater {
             archetypeId,
             iterationId
         ]);
-    
-        console.log('Archetype insert result:', {
-            rowCount: archetypeResult.rowCount,
-            rows: archetypeResult.rows
-        });
 
 
         await client.query(ratingQuery, ratingValues);

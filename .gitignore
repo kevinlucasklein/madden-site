@@ -41,4 +41,5 @@ test-results/
 playwright-report/
 
 .env
-12-week-11.json
+backend/db/iterations/*
+backend/db/maddentools_iterations/*

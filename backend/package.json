@@ -9,8 +9,8 @@
     "setup:db": "tsx db/scripts/create_db_if_not_exist.ts && tsx db/scripts/setup_db.ts && tsx db/scripts/static_db.ts",
     "delete:db": "tsx db/scripts/delete_db.ts",
     "update:ratings": "tsx db/scripts/updateRatings.ts",
-    "reset:db": "npm run delete:db && npm run setup:db && npm run update:ratings"
-    
+    "reset:db": "npm run delete:db && npm run setup:db && npm run update:ratings && npm run update:devTraits",
+    "update:devTraits": "tsx db/scripts/updateDevTraits.ts"
   },
   "keywords": [],
   "author": "",
